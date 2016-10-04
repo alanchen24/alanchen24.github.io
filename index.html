@@ -235,6 +235,104 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/04/观察者模式/" itemprop="url">
+                  观察者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-04T13:47:13+08:00" content="2016-10-04">
+              2016-10-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一个主题一个科目-事件"><a href="#一个主题一个科目-事件" class="headerlink" title="一个主题一个科目(事件)"></a>一个主题一个科目(事件)</h2><h3 id="主题-Topic"><a href="#主题-Topic" class="headerlink" title="主题(Topic)"></a>主题(Topic)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  主题维护着观察者列表，观察者的添加或者删除的方法,以及发送通知</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Topic</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> ArrayList&lt;Observer&gt; observers = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">  <span class="comment">// 添加观察者</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addObservers</span><span class="params">(Observer observer)</span></span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 删除观察者</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer observer)</span></span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 通知观察者</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(Observer：observer : observers)&#123;</div><div class="line">      observer.update();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="科目-subject-Or-事件-Event"><a href="#科目-subject-Or-事件-Event" class="headerlink" title="科目(subject) Or 事件(Event)"></a>科目(subject) Or 事件(Event)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  科目 或 事件 维持自己的状态</div><div class="line">  特定的状态通知观察者</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Weather</span> <span class="keyword">extends</span> <span class="title">Topic</span></span>&#123;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">  <span class="comment">// 通知观察者</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">super</span>.notifyAll();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">/*</span></div><div class="line">   观察者收到通知的回调方法，由特定子类实现</div><div class="line">   类似于一个桩 (tub) ,仅仅只是用来接收消息通知</div><div class="line">  */</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###</p>
+<h3 id="具体观察者"><a href="#具体观察者" class="headerlink" title="具体观察者"></a>具体观察者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> WeatherWather implements Observer&#123;</div><div class="line">  <span class="comment">// ... ...</span></div><div class="line"></div><div class="line">  <span class="comment">// 观察者收到通知的回调方法</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">// 接收到通知，执行相关的回调</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/04/策略模式/" itemprop="url">
                   策略模式
                 </a>
@@ -454,7 +552,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
